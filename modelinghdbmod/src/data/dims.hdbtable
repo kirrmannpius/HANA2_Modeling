@@ -1,0 +1,5 @@
+COLUMN TABLE "modelingproject.modelinghdbmod.data::dims" 
+(
+   "ID" INTEGER, 
+   "TEAM" VARCHAR(50)
+)

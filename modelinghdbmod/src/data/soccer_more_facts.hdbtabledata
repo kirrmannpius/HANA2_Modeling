@@ -1,0 +1,20 @@
+{
+    "format_version": 1,
+    "imports": [
+        {
+            "target_table": "modelingproject.modelinghdbmod.data::more_facts",
+            "source_data": {
+                "data_type": "CSV",
+                "file_name": "modelingproject.modelinghdbmod.data::soccer_more_facts.csv",
+                "has_header": true
+            },
+            "import_settings": {
+                "import_columns": [
+                    "ID",
+                    "SEASON",
+					"DECADE"
+                ]
+            }
+        }
+    ]
+}

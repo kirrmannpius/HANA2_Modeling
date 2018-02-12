@@ -1,0 +1,6 @@
+COLUMN TABLE "modelingproject.modelinghdbmod.data::facts" 
+(
+   "ID" INTEGER, 
+   "SEASON" VARCHAR(4),
+   "DECADE" VARCHAR(5)
+)
