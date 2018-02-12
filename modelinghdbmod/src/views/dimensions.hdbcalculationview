@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="modelingproject.modelinghdbmod.views::dimensions" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="dimensions"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="modelingproject.modelinghdbmod.data::dims">
+    <resourceUri>modelingproject.modelinghdbmod.data::dims</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+<logicalModel id="modelingproject.modelinghdbmod.data::dims">
+  <attributes>
+    <attribute id="ID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ID"/>
+      <keyMapping columnObjectName="dims" columnName="ID"/>
+    </attribute>
+    <attribute id="TEAM" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TEAM"/>
+      <keyMapping columnObjectName="dims" columnName="TEAM"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="100" y="105"/>
+    
+      <rectangleSize width="213"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
