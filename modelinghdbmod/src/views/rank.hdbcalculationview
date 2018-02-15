@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="modelingproject.modelinghdbmod.views::rank" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="rank"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="modelingproject.modelinghdbmod.views::allfacts">
+    <resourceUri>modelingproject.modelinghdbmod.views::allfacts</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:RankView" id="Rank">
+    <viewAttributes>
+      <viewAttribute id="TEAM">
+        <descriptions defaultDescription="TEAM"/>
+      </viewAttribute>
+      <viewAttribute id="TROPHIES" aggregationType="sum">
+        <descriptions defaultDescription="ID"/>
+      </viewAttribute>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="modelingproject.modelinghdbmod.views::allfacts">
+      <mapping xsi:type="Calculation:AttributeMapping" target="TEAM" source="TEAM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TROPHIES" source="TROPHIES"/>
+    </input>
+    <windowFunction>
+      <order byViewAttributeName="TROPHIES" direction="DESC"/>
+      <rankThreshold>
+        <value>5</value>
+      </rankThreshold>
+      <rankViewAttributeName>RANK</rankViewAttributeName>
+    </windowFunction>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Rank">
+  <attributes>
+    <attribute id="TEAM" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TEAM"/>
+      <keyMapping columnObjectName="Rank" columnName="TEAM"/>
+    </attribute>
+    <attribute id="RANK" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="RANK"/>
+      <keyMapping columnObjectName="Rank" columnName="RANK"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="TROPHIES" order="2" aggregationType="max" measureType="simple">
+      <descriptions defaultDescription="ID"/>
+      <measureMapping columnObjectName="Rank" columnName="TROPHIES"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Rank" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="310"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
