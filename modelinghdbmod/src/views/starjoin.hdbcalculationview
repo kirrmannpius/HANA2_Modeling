@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="modelingproject.modelinghdbmod.views::starjoin" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="starjoin"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="modelingproject.modelinghdbmod.data::other_facts">
+    <resourceUri>modelingproject.modelinghdbmod.data::other_facts</resourceUri>
+  </DataSource>
+  <DataSource id="modelingproject.modelinghdbmod.views::union">
+    <resourceUri>modelingproject.modelinghdbmod.views::union</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join" cardinality="C1_1" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="ID">
+        <descriptions defaultDescription="ID"/>
+      </viewAttribute>
+      <viewAttribute id="SEASON">
+        <descriptions defaultDescription="SEASON"/>
+      </viewAttribute>
+      <viewAttribute id="TOP_SCORER_GOALS_SCORED" aggregationType="sum">
+        <descriptions defaultDescription="TOP_SCORER_GOALS_SCORED"/>
+      </viewAttribute>
+      <viewAttribute hidden="true" id="JOIN$SEASON$SEASON"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="OVER_30" datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+        <formula>if(&quot;TOP_SCORER_GOALS_SCORED&quot; &gt; 30, 1, 0)</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+    <input node="modelingproject.modelinghdbmod.data::other_facts">
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOP_SCORER_GOALS_SCORED" source="TOP_SCORER_GOALS_SCORED"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$SEASON$SEASON" source="SEASON"/>
+    </input>
+    <input node="modelingproject.modelinghdbmod.views::union">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SEASON" source="SEASON"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$SEASON$SEASON" source="SEASON"/>
+    </input>
+    <joinAttribute name="JOIN$SEASON$SEASON"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join">
+  <attributes>
+    <attribute id="SEASON" hidden="true" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SEASON"/>
+      <keyMapping columnObjectName="Join" columnName="SEASON"/>
+    </attribute>
+    <attribute id="ID$local">
+      <descriptions defaultDescription="ID"/>
+      <keyMapping columnObjectName="Join" columnName="ID"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="TROPHY_COUNT" order="1" aggregationType="count" measureType="simple">
+      <descriptions defaultDescription="TROPHY_COUNT"/>
+      <measureMapping columnObjectName="Join" columnName="ID"/>
+    </measure>
+    <measure id="OVER_30" order="3" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="OVER_30"/>
+      <measureMapping columnObjectName="Join" columnName="OVER_30"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+  <sharedDimensions>
+    <logicalJoin associatedObjectUri="modelingproject.modelinghdbmod.views::dimensions">
+      <attributes>
+        <attributeRef>ID$local</attributeRef>
+      </attributes>
+      <associatedAttributeNames>
+        <attributeName>ID</attributeName>
+      </associatedAttributeNames>
+      <properties cardinality="CN_1" joinType="referential" joinOperator="Equal"/>
+      <associatedAttributeFeatures>
+        <attributeReference attributeName="ID" hidden="true"/>
+      </associatedAttributeFeatures>
+    </logicalJoin>
+  </sharedDimensions>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="106" y="224"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape modelObjectName="modelingproject.modelinghdbmod.data::other_facts" modelObjectNameSpace="Join" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="258"/>
+    </shape>
+    <shape modelObjectName="modelingproject.modelinghdbmod.views::union" modelObjectNameSpace="Join" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="Join" modelObjectNameSpace="StarJoinViewNodeInput" modelObjectType="repository">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="258.79345703125"/>
+    </shape>
+    <shape modelObjectName="modelingproject.modelinghdbmod.views::dimensions" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

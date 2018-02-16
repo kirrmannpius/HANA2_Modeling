@@ -8,3 +8,4 @@ SAP HANA 2.0 Modeling (SAP HANA Academy)
 5. Unioning in Calculation Views
 6. Replacing Data Sources
 7. Ranking in Calculation Views
+8. Star Joins in Calculation Views
